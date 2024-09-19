@@ -81,7 +81,7 @@ try {
     console.log("Scenario 7 failed");
 } catch (error) {
     if (error instanceof Error) {
-        console.log("Scenario 7 passed: " + error.message); // expecting "Insufficient funds"
+        console.log("Scenario 7 passed: " + error.message);
     } else {
         console.log("Scenario 7 passed: Unknown error occurred");
     }
@@ -110,5 +110,34 @@ try {
         console.log("Scenario 9 passed: Unknown error occurred");
     }
 }
+
+// scenario 10: successful balance check
+try {
+    const balance = bank.checkBalance("2938298");
+    if (balance === 50) {
+        console.log("Scenario 10 passed");
+    } else {
+        console.log("Scenario 10 failed");
+    }
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 10 failed: " + error.message);
+    } else {
+        console.log("Scenario 10 failed: Unknown error occurred");
+    }
+}
+
+// scenario 11: balance check for a non-existing account
+try {
+    bank.checkBalance("0000000");
+    console.log("Scenario 11 failed");
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 11 passed: " + error.message);
+    } else {
+        console.log("Scenario 11 passed: Unknown error occurred");
+    }
+}
+
 
 
