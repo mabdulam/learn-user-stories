@@ -14,14 +14,14 @@ export default class Bank {
     private accounts: BankAccount[] = [];
 
     /**
-     * Mehtod to find a bank account by account number
+     * Method to find a bank account by account number
      * @param {string} accountNumber Account number to find
      * @returns Bank account if found, undefined otherwise
      */
     private findAccount(accountNumber: string): BankAccount | undefined {
         return this.accounts.find(account => account.accountNumber === accountNumber);
     }
-    
+
     /**
      * Method to create a new bank account with a unique account number
      * @param {string} name Name of the account holder
@@ -43,5 +43,22 @@ export default class Bank {
         };
         this.accounts.push(account);
         return account;
+    }
+
+    /**
+     * Method to deposit money into a bank account
+     * @param {string} accountNumber Account number to deposit into
+     * @param {number} amount Amount to deposit
+     * @throws Error if account not found or invalid amount
+     */
+    public deposit(accountNumber: string, amount: number): void {
+        const account = this.findAccount(accountNumber);
+        if (!account) {
+            throw new Error("Account not found");
+        }
+        if (amount <= 0) {
+            throw new Error("Invalid deposit amount");
+        }
+        account.balance += amount;
     }
 }
