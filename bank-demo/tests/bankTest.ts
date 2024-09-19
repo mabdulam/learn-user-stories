@@ -59,3 +59,56 @@ try {
     }
 }
 
+// scenario 6: successful withdrawal
+try {
+    bank.withdraw("2938298", 50);
+    if (account.balance === 50) {
+        console.log("Scenario 6 passed");
+    } else {
+        console.log("Scenario 6 failed");
+    }
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 6 failed: " + error.message);
+    } else {
+        console.log("Scenario 6 failed: Unknown error occurred");
+    }
+}
+
+// scenario 7: insufficient funds withdrawal
+try {
+    bank.withdraw("2938298", 100);
+    console.log("Scenario 7 failed");
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 7 passed: " + error.message); // expecting "Insufficient funds"
+    } else {
+        console.log("Scenario 7 passed: Unknown error occurred");
+    }
+}
+
+// scenario 8: invalid withdrawal amount (zero or negative)
+try {
+    bank.withdraw("2938298", -50);
+    console.log("Scenario 8 failed");
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 8 passed: " + error.message);
+    } else {
+        console.log("Scenario 8 passed: Unknown error occurred");
+    }
+}
+
+// scenario 9: withdrawal from a non-existing account
+try {
+    bank.withdraw("0000000", 50);
+    console.log("Scenario 9 failed");
+} catch (error) {
+    if (error instanceof Error) {
+        console.log("Scenario 9 passed: " + error.message);
+    } else {
+        console.log("Scenario 9 passed: Unknown error occurred");
+    }
+}
+
+

@@ -61,4 +61,25 @@ export default class Bank {
         }
         account.balance += amount;
     }
+
+    /**
+     * Method to withdraw money from a bank account
+     * @param {string} accountNumber Account number to withdraw from
+     * @param {number} amount Amount to withdraw
+     * @throws Error if account not found, invalid amount, or insufficient funds
+     */
+    public withdraw(accountNumber: string, amount: number): void {
+        const account = this.findAccount(accountNumber);
+        if (!account) {
+            throw new Error("Account not found");
+        }
+        if (amount <= 0) {
+            throw new Error("Invalid withdrawal amount");
+        }
+        if (account.balance < amount) {
+            throw new Error("Insufficient funds");
+        }
+        account.balance -= amount;
+    }
 }
+
